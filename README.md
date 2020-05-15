@@ -51,8 +51,8 @@ Download grafana-6.7.3 for linux & overlay the following assets from this repo t
   - configures grafana to use oAuthPassThru to authenticate against log-cache service.
 
 Deployment:
-Create Grafana UAA client and register in credhub
-Note CredHub secret must be bound to grafana db app (see manifest.yml)
-Rename profile to .profile in root folder of grafana
-Overlay assets from this repo into grafana, replacing existing files
-Inject PCC SI GUID into sample manifest and push app
+-Create Grafana UAA client and register in credhub
+-Note CredHub secret must be bound to grafana db app (see manifest.yml)
+-Rename profile to .profile in root folder of grafana
+-Overlay assets from this repo into grafana, replacing existing files
+-Inject PCC SI GUID into sample manifest and push app
