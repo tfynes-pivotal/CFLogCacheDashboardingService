@@ -22,3 +22,6 @@ UAA client (id/secret) for instances of the dashboarding engine to leverage with
 Steps to create client using uaac (already deployed to OpsManager VM)
 
 CredhubService instance hosting this Grafana UAA client id and secret
+`  cf cs credhub default grafanaUaaClient -c '{"clientid":"grafana","clientsecret":"grafana"}
+
+
