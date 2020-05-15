@@ -20,12 +20,29 @@ PreRequisites
 *UAA client (id/secret) for instances of the dashboarding engine to leverage with the following scopes;
 
 *Steps to create client using uaac (already deployed to OpsManager VM)
+```
+uaac target https://uaa.<system-domain>
+uaac client get admin get -s <uaa admin secret>
+# Note - redirect_uri grafana dashboards FQDNs whitelist
+uaac client add --name grafanaUaaClientId --scope openid,uaa.resource,doppler.firehose,logs.admin,cloud_controller.read --authorized_grant_types openid,uaa.resource,doppler.firehose,logs.admin,cloud_controller.read --redirect_uri https://grafana.homelab.fynesy.com/** -s grafanaUaaClientSecret
+```
 
 *CredhubService instance hosting this Grafana UAA client id and secret
 ```
-  cf cs credhub default grafanaUaaClient -c '{"clientid":"grafana","clientsecret":"grafana"}
+  cf cs credhub default grafanaUaaClient -c '{"clientid":"grafanaUaaClientId","clientsecret":"grafanaUaaClientSecret"}
 ```
 Note this service instance can be created once and shared in the target spaces into which Grafana dashboard instances will run.
+
+Modify conf/defaults.ini "Generic OAuth" URLs for your TAS UAA service
+
+Download grafana-6.7.3 for linux 
+Overlay assets from this repo to your install
+
+  /profile - rename to .profile before pushing - configures GenericOAuth clientId and clientSecret from Credhub (in defaults/ini)
+  
+  /manifest.yml - sample deployment manifest
+  /pccdashboards - sample dashboard for PCC service instance
+  /conf/defaults.ini - UAA integration code
 
 
 
