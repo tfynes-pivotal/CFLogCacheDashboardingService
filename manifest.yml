@@ -1,0 +1,16 @@
+applications:
+- name: grafana
+  buildpacks:
+  - binary_buildpack
+  command: /home/vcap/app/bin/grafana-server
+  disk_quota: 1G
+  instances: 1
+  memory: 1G
+  routes:
+  - route: grafana.homelab.fynesy.com
+  stack: cflinuxfs3
+  services:
+  - grafanaUaaClient
+  env:
+    pccguid: 5040b56a-bc67-4bae-8026-7157c729ae1c
+#    pccguid: 2ffc6002-db9d-4aeb-9ab1-538154c06dc0

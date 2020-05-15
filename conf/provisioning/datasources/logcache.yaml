@@ -1,0 +1,36 @@
+apiVersion: 1
+
+datasources:
+- id: 1
+  orgId: 1
+  name: LogCache
+  type: prometheus
+  typeLogoUrl: public/app/plugins/datasource/prometheus/img/prometheus_logo.svg
+  access: proxy
+  editable: true
+  url: https://log-cache.system.homelab.fynesy.com
+  basicAuth: false
+  isDefault: true
+  jsonData:
+     tlsAuth: false
+     tlsAuthWithCACert: false
+     oauthPassThru: true
+  readOnly: false
+
+
+# datasources:
+# - id: 1
+#  orgId: 1
+#  name: LogCache
+#  type: prometheus
+#  typeLogoUrl: public/app/plugins/datasource/prometheus/img/prometheus_logo.svg
+#  access: proxy
+#  url: https://log-cache.system.homelab.fynesy.com
+#  password: ''
+#  user: ''
+#  database: ''
+#  basicAuth: false
+#  isDefault: true
+#  jsonData:
+#    oauthPassThru: true
+#  readOnly: false
