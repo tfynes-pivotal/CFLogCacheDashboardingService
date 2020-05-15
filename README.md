@@ -17,11 +17,16 @@ Experimental dashboard included to instrument the KPIs from the "Tanzu Gemfire" 
 
 
 PreRequisites
-UAA client (id/secret) for instances of the dashboarding engine to leverage with the following scopes;
+*UAA client (id/secret) for instances of the dashboarding engine to leverage with the following scopes;
 
-Steps to create client using uaac (already deployed to OpsManager VM)
+*Steps to create client using uaac (already deployed to OpsManager VM)
 
-CredhubService instance hosting this Grafana UAA client id and secret
-`  cf cs credhub default grafanaUaaClient -c '{"clientid":"grafana","clientsecret":"grafana"}
+*CredhubService instance hosting this Grafana UAA client id and secret
+```
+  cf cs credhub default grafanaUaaClient -c '{"clientid":"grafana","clientsecret":"grafana"}
+```
+Note this service instance can be created once and shared in the target spaces into which Grafana dashboard instances will run.
+
+
 
 
