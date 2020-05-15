@@ -1,46 +1,44 @@
-![Grafana](docs/logo-horizontal.png)
+Cloud Foundry / Tanzu Application Service (TAS) telemetry / instrumentation dashboards
 
-The open-source platform for monitoring and observability.
+Application developers want to instrument their applications and dependent services hosted in TAS. Metrics data is emitted from applications and stored by the platform engine in a TSDB service called 'log-cache' that supports PrometheusQL
 
-[![License](https://img.shields.io/github/license/grafana/grafana)](LICENSE)
-[![Circle CI](https://img.shields.io/circleci/build/gh/grafana/grafana)](https://circleci.com/gh/grafana/grafana)
-[![Go Report Card](https://goreportcard.com/badge/github.com/grafana/grafana)](https://goreportcard.com/report/github.com/grafana/grafana)
+Tenant access to the log-cache service is available through the TAS security service; UAA
 
-Grafana allows you to query, visualize, alert on and understand your metrics no matter where they are stored. Create, explore, and share dashboards with your team and foster a data driven culture:
+The only thing missing is the ability to take this metrics data and rapidly visualize it.
 
-- **Visualize:** Fast and flexible client side graphs with a multitude of options. Panel plugins for many different way to visualize metrics and logs.
-- **Dynamic Dashboards:** Create dynamic & reusable dashboards with template variables that appear as dropdowns at the top of the dashboard.
-- **Explore Metrics:** Explore your data through ad-hoc queries and dynamic drilldown. Split view and compare different time ranges, queries and data sources side by side.
-- **Explore Logs:** Experience the magic of switching from metrics to logs with preserved label filters. Quickly search through all your logs or streaming them live.
-- **Alerting:** Visually define alert rules for your most important metrics. Grafana will continuously evaluate and send notifications to systems like Slack, PagerDuty, VictorOps, OpsGenie.
-- **Mixed Data Sources:** Mix different data sources in the same graph! You can specify a data source on a per-query basis. This works for even custom datasources.
+Grafana is an excellent tool perfectly suited to this purpose, creating dashboards & alerts based on a backing datastore.
 
-## Get started
+This project integrates Grafana with TAS-UAA and TAS-LogCache components to allow for rapid creation of grafana-dashboards which would be hosted within the TAS platform.
 
-- [Get Grafana](https://grafana.com/get)
-- [Installation guides](http://docs.grafana.org/installation/)
+Experimental dashboard included to instrument the KPIs from the "Tanzu Gemfire" data-grid TAS Service.
 
-Unsure if Grafana is for you? Watch Grafana in action on [play.grafana.org](https://play.grafana.org/)!
+PreRequisites *UAA client (id/secret) for instances of the dashboarding engine to leverage with the following scopes;
 
-## Documentation
+*Steps to create client using uaac (already deployed to OpsManager VM)
 
-The Grafana documentation is available at [grafana.com/docs](https://grafana.com/docs/).
+uaac target https://uaa.<system-domain>
+uaac client get admin get -s <uaa admin secret>
+# Note - redirect_uri grafana dashboards FQDNs whitelist
+uaac client add --name grafanaUaaClientId --scope openid,uaa.resource,doppler.firehose,logs.admin,cloud_controller.read --authorized_grant_types openid,uaa.resource,doppler.firehose,logs.admin,cloud_controller.read --redirect_uri https://grafana.homelab.fynesy.com/** -s grafanaUaaClientSecret
+*CredhubService instance hosting this Grafana UAA client id and secret
 
-## Contributing
+  cf cs credhub default grafanaUaaClient -c '{"clientid":"grafanaUaaClientId","clientsecret":"grafanaUaaClientSecret"}
+Note this service instance can be created once and shared in the target spaces into which Grafana dashboard instances will run.
 
-If you're interested in contributing to the Grafana project:
+Modify conf/defaults.ini "Generic OAuth" URLs for your TAS UAA service
 
-- Start by reading the [Contributing guide](/CONTRIBUTING.md).
-- Learn how to set up your local environment, in our [Developer guide](/contribute/developer-guide.md).
-- Explore our [beginner-friendly issues](https://github.com/grafana/grafana/issues?q=is%3Aopen+is%3Aissue+label%3A%22beginner+friendly%22).
+Download grafana-6.7.3 for linux Overlay assets from this repo to your install
 
-## Get involved
+/profile - rename to .profile before pushing - configures GenericOAuth clientId and clientSecret from Credhub (in defaults/ini) - injects PCC (TanzuGemfire) ServiceInstance GUID into pcc.json sample PCC dashboard (acquired with cf service pcc1 --guid)
 
-- Follow [@grafana on Twitter](https://twitter.com/grafana/)
-- Read and subscribe to the [Grafana blog](https://grafana.com/blog/)
-- If you have a specific question, check out our [discussion forums](https://community.grafana.com/).
-- For general discussions, join us on the [official Slack](http://slack.raintank.io/) team.
+/manifest.yml - sample deployment manifest
 
-## License
+/pccdashboards/pcc.json - sample dashboard for PCC service instance
 
-Grafana is distributed under the [Apache 2.0 License](https://github.com/grafana/grafana/blob/master/LICENSE).
+/conf/defaults.ini - UAA integration code
+
+/conf/provisioning/dashboards/pcc.yaml - configures the '/pccdashboards' folder as dashboard json location
+
+/conf/provisioning/datasources/logcache.yaml - configures the location of the log-cache endpoint **change endpoint to loc-cache. for your foundation. Also configures grafana to use oAuthPassThru to authenticate against log-cache service.
+
+Deployment Inject PCC SI GUID into sample manifest and push app
