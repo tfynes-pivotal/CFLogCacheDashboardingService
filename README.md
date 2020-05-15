@@ -38,12 +38,30 @@ Modify conf/defaults.ini "Generic OAuth" URLs for your TAS UAA service
 Download grafana-6.7.3 for linux 
 Overlay assets from this repo to your install
 
-  /profile - rename to .profile before pushing - configures GenericOAuth clientId and clientSecret from Credhub (in defaults/ini)
+  /profile - rename to .profile before pushing 
+      - configures GenericOAuth clientId and clientSecret from Credhub (in defaults/ini)
+      - injects PCC (TanzuGemfire) ServiceInstance GUID into pcc.json sample PCC dashboard 
+          (acquired with cf service pcc1 --guid)
   
   /manifest.yml - sample deployment manifest
-  /pccdashboards - sample dashboard for PCC service instance
+  
+  /pccdashboards/pcc.json - sample dashboard for PCC service instance
+  
   /conf/defaults.ini - UAA integration code
-
+  
+  /conf/provisioning/dashboards/pcc.yaml - configures the '/pccdashboards' folder as dashboard json location
+  
+  /conf/provisioning/datasources/logcache.yaml - configures the location of the log-cache endpoint **change endpoint to loc-cache.<system-domain> for your foundation. Also configures grafana to use oAuthPassThru to authenticate against log-cache service.
+  
+  Deployment
+    Inject PCC SI GUID into sample manifest and push app
+    
+    
+  
+  
+  
+  
+  
 
 
 
