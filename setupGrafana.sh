@@ -1,5 +1,7 @@
 #!/bin/bash
 
+# NOTE MUST BE RUN FROM REPOSITORY HOME DIRECTORY
+
 if [ -d "./grafana-6.7.3" ] 
 then
   mv ./grafana-6.7.3/bin .
