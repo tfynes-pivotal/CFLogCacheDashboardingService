@@ -1,5 +1,5 @@
 applications:
-- name: grafana3
+- name: grafana4
   buildpacks:
   - binary_buildpack
   command: /home/vcap/app/bin/grafana-server
@@ -7,10 +7,11 @@ applications:
   instances: 1
   memory: 256M
   routes:
-  - route: grafana3.homelab.fynesy.com
+  - route: grafana4.homelab.fynesy.com
   stack: cflinuxfs3
   services:
   - grafanaUaaClient
+  - pcc2
   env:
-    pccguid: 5040b56a-bc67-4bae-8026-7157c729ae1c
+#    pccguid: 5040b56a-bc67-4bae-8026-7157c729ae1c
 #    pccguid: 2ffc6002-db9d-4aeb-9ab1-538154c06dc0
