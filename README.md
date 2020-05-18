@@ -19,7 +19,7 @@ PreRequisites:
 *Steps to create client using uaac (already deployed to OpsManager VM)
 ```
 uaac target https://uaa.<system-domain>
-uaac client get admin get -s <uaa admin secret>
+uaac token client get admin get -s <uaa admin secret>
 # Note - redirect_uri grafana dashboards FQDNs whitelist
 uaac client add --name grafanaUaaClientId --scope openid,uaa.resource,doppler.firehose,logs.admin,cloud_controller.read --authorized_grant_types openid,uaa.resource,doppler.firehose,logs.admin,cloud_controller.read --redirect_uri https://grafana.homelab.fynesy.com/** -s grafanaUaaClientSecret
 ```
