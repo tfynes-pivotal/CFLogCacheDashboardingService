@@ -69,6 +69,8 @@ WHATS HAPPENING
 /conf/provisioning/datasources/logcache.yaml 
   - configures the location of the log-cache endpoint  
   - configures grafana to use oAuthPassThru to authenticate against log-cache service.
+  
+NOTE: When you hit the grafana dashboard URI for the first time, navigate to dashboards / manage (left of screen) and select the PCC Dashboard
 
 DAY2 Use:
 use 'cf log-meta' and 'cf tail' to discovery other platform, application or services to instrument. Create new panels for existing sample dashboard and when ready just export the json (share dashboard / export json). This json file can be placed in './pccdashboards'. 
