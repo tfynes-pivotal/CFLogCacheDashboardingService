@@ -49,15 +49,15 @@ DEPLOYMENT STEPS
 6. cf push
 
 WHATS HAPPENING
-1. manifest file orders cf to use binary-buildpack and launch grafana-server
-2. grafana-server looks in ./conf/defaults.ini for initial configuration
-3. '.profile' script executed on container-launch by platform, performs following tasks:
-  3.1 Extracts grafanaUaaClientId&Secret from Credhub-SI 'grafanaUaaClient' and injects them into the generic-oauth section of defaults.ini
-  3.2 Extracts PCC SI GUID from the bound PCC service instance key (extracting it from the hostname of the SI management endpoint)
-  3.3 Updates the root_uri for the grafana dashboard to listen on by inspecting first exposed route of this CF application.
-  3.4 Update UAA endpoints for oAuth integration to reflect the founation's "system-domain"  in defaults.ini generic-oauth section
+* 1. manifest file orders cf to use binary-buildpack and launch grafana-server
+* 2. grafana-server looks in ./conf/defaults.ini for initial configuration
+* 3. '.profile' script executed on container-launch by platform, performs following tasks:
+  *  3.1 Extracts grafanaUaaClientId&Secret from Credhub-SI 'grafanaUaaClient' and injects them into the generic-oauth section of defaults.ini
+  * 3.2 Extracts PCC SI GUID from the bound PCC service instance key (extracting it from the hostname of the SI management endpoint)
+  * 3.3 Updates the root_uri for the grafana dashboard to listen on by inspecting first exposed route of this CF application.
+  * 3.4 Update UAA endpoints for oAuth integration to reflect the founation's "system-domain"  in defaults.ini generic-oauth section
         system.domain discovered from VCAP_APPLICATION/cf_api endpoint
-  3.5 Update the conf/provisioning/datasources/logcache.yml configuration file "system-domain" to that of current foundation
+  * 3.5 Update the conf/provisioning/datasources/logcache.yml configuration file "system-domain" to that of current foundation
  
 
 
