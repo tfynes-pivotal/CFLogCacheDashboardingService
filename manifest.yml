@@ -1,13 +1,13 @@
 applications:
-- name: grafana
+- name: grafana3
   buildpacks:
   - binary_buildpack
   command: /home/vcap/app/bin/grafana-server
   disk_quota: 1G
   instances: 1
-  memory: 1G
+  memory: 256M
   routes:
-  - route: grafana.homelab.fynesy.com
+  - route: grafana3.homelab.fynesy.com
   stack: cflinuxfs3
   services:
   - grafanaUaaClient

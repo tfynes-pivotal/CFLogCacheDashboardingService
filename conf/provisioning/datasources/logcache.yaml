@@ -8,7 +8,8 @@ datasources:
   typeLogoUrl: public/app/plugins/datasource/prometheus/img/prometheus_logo.svg
   access: proxy
   editable: true
-  url: https://log-cache.system.homelab.fynesy.com
+  #url: https://log-cache.system.homelab.fynesy.com
+  url: https://log-cache.system_domain
   basicAuth: false
   isDefault: true
   jsonData:
