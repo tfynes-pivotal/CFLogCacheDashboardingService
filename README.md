@@ -48,7 +48,7 @@ wget https://dl.grafana.com/oss/release/grafana-7.0.0.linux-amd64.tar.gz
 
 DEPLOYMENT STEPS
 1. Create working directory
-* mkdir grafana
+```mkdir grafana```
 2. Download / copy grafana gzip archive to this folder
 * cd grafana
 * wget https://dl.grafana.com/oss/release/grafana-7.0.0.linux-amd64.tar.gz
