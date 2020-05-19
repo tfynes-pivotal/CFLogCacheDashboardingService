@@ -38,7 +38,10 @@ Note - Use admin client secret as defined when creating client in previous step
 PREREQ SUMMARY
 1. create uaa client for grafana instances to access log-cache
 2. store this uaa client id and secret in credhub service - called **"grafanaUaaClient"**
-3. download grafana-6.7.3 binary for linux64
+3. download grafana-7.0.0+ binary for linux64
+```
+wget https://dl.grafana.com/oss/release/grafana-7.0.0.linux-amd64.tar.gz
+```
 
 DEPLOYMENT STEPS
 1. Clone repo and open command prompt in repository directory
