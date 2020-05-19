@@ -21,9 +21,10 @@ openid,uaa.resource,doppler.firehose,logs.admin,cloud_controller.read
 
 *Steps to create client using uaac (already deployed to OpsManager VM)
 ```
+ssh -i <om-key> ubuntu@<ops-mgr host>
 uaac target https://uaa.<system-domain>
-uaac token client get admin get -s <uaa admin secret>
-# Note - redirect_uri grafana dashboards FQDNs whitelist
+uaac token client get admin get -s <uaa admin-client secret from OM TAS tile credentials tab>
+# Note - create grafanaUaaClient with required scopes and **redirect_uri grafana dashboards FQDN wildcard on <apps-domain>**
 uaac client add --name grafanaUaaClientId --scope openid,uaa.resource,doppler.firehose,logs.admin,cloud_controller.read --authorized_grant_types openid,uaa.resource,doppler.firehose,logs.admin,cloud_controller.read --redirect_uri https://*.<system-domain>/** -s grafanaUaaClientSecret
 ```
 
