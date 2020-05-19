@@ -44,12 +44,24 @@ wget https://dl.grafana.com/oss/release/grafana-7.0.0.linux-amd64.tar.gz
 ```
 
 DEPLOYMENT STEPS
-1. Clone repo and open command prompt in repository directory
-2. Extract grafana binary to ./grafana-6.7.3
-3. Run ./setupGrafana.sh to move assets from grafana distribution sub-folder up to current
+1. Create working directory
+* mkdir grafana
+2. Download / copy grafana gzip archive to this folder
+* cd grafana
+* wget https://dl.grafana.com/oss/release/grafana-7.0.0.linux-amd64.tar.gz
+3. Clone this repo and cd into repository directory (CFLogCacheDashboardingService)
+* git clone https://github.com/tfynes-pivotal/CFLogCacheDashboardingService
+* cd CFLogCacheDashboardingService
+2. Extract grafana binary to current (repository directory)
+* tar zxvf ../grafana-7.0.0.linux-amd64.tar.gz
+3. Run ./setupGrafana.sh to move assets from grafana distribution sub-folder up to current 
+* ./setupGrafana.sh
 4. Modify manifest.yml to reflect your application name, ingress-route, pcc-SI and Credhub-SI (containing grafana UAA client details)
+...
 5. ** Copy/Move profile script to <dot>-Profile "cp ./profile ./.profile" ** 
-6. cf push
+* cp profile .profile
+6. Deploy the dashboard
+* cf push
 
 WHATS HAPPENING
 * 1. manifest file orders cf to use binary-buildpack and launch grafana-server
