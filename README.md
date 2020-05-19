@@ -20,21 +20,23 @@ openid,uaa.resource,doppler.firehose,logs.admin,cloud_controller.read
 ```
 
 *Steps to create client using uaac (already deployed to OpsManager VM)
+Choose acceptable values for grafanaUaaClientId and grafanaUaaClientSecret
 ```
 ssh -i <om-key> ubuntu@<ops-mgr host>
 uaac target https://uaa.<system-domain>
 uaac token client get admin get -s <uaa admin-client secret from OM TAS tile credentials tab>
 # Note - create grafanaUaaClient with required scopes and **redirect_uri grafana dashboards FQDN wildcard on <apps-domain>**
-uaac client add --name grafanaUaaClientId --scope openid,uaa.resource,doppler.firehose,logs.admin,cloud_controller.read --authorized_grant_types openid,uaa.resource,doppler.firehose,logs.admin,cloud_controller.read --redirect_uri https://*.<system-domain>/** -s grafanaUaaClientSecret
+uaac client add --name <grafanaUaaClientId> --scope openid,uaa.resource,doppler.firehose,logs.admin,cloud_controller.read --authorized_grant_types openid,uaa.resource,doppler.firehose,logs.admin,cloud_controller.read --redirect_uri https://*.<apps-domain>/** -s <grafanaUaaClientSecret>
 ```
 
 *CredhubService instance hosting this Grafana UAA client id and secret
 ```
-  cf cs credhub default grafanaUaaClient -c '{"clientid":"grafanaUaaClientId","clientsecret":"grafanaUaaClientSecret"}
+  cf cs credhub default grafanaUaaClient -c '{"clientid":"<grafanaUaaClientId>","clientsecret":"<grafanaUaaClientSecret>"}
 ```
 Note this service instance can be created once and shared in the target spaces into which Grafana dashboard instances will run.
-Note - Use admin client secret as defined when creating client in previous step
-
+```
+cf share-service grafanaUaaClient -s <space-to-share-service-in>
+```
 
 PREREQ SUMMARY
 1. create uaa client for grafana instances to access log-cache
