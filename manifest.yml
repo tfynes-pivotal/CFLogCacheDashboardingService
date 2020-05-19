@@ -1,5 +1,5 @@
 applications:
-- name: grafana5
+- name: gx
   buildpacks:
   - binary_buildpack
   command: /home/vcap/app/bin/grafana-server
@@ -7,7 +7,7 @@ applications:
   instances: 1
   memory: 256M
   routes:
-  - route: grafana5.homelab.fynesy.com
+  - route: gx.homelab.fynesy.com
   stack: cflinuxfs3
   services:
   - grafanaUaaClient
