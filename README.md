@@ -104,4 +104,4 @@ WHATS HAPPENING
 NOTE: When you hit the grafana dashboard URI for the first time, navigate to dashboards / manage (left of screen) and select the PCC Dashboard
 
 DAY2 Use:
-use 'cf log-meta' and 'cf tail' to discovery other platform, application or services to instrument. Create new panels for existing sample dashboard and when ready just export the json (share dashboard / export json). This json file can be placed in './pccdashboards'. 
+use 'cf log-meta' and 'cf tail' to discovery other platform, application or services to instrument. Create new panels for existing sample dashboard and when ready just export the json (share dashboard / export json). This json file can be placed in './pccdashboards' so that when you re-push the grafana app it will preserve an immutable copy of your new panels/dashboards/alerts, etc...
