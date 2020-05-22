@@ -16,7 +16,7 @@ PreRequisites:
 
 *UAA client (id/secret) for instances of the dashboarding engine to leverage with the following scopes;
 ```
-openid,uaa.resource,doppler.firehose,logs.admin,cloud_controller.read
+openid,uaa.resource,doppler.firehose,logs.admin
 ```
 
 *Steps to create client using uaac (already deployed to OpsManager VM)
@@ -26,7 +26,8 @@ ssh -i <om-key> ubuntu@<ops-mgr host>
 uaac target https://uaa.<system-domain>
 uaac token client get admin get -s <uaa admin-client secret from OM TAS tile credentials tab>
 # Note - create grafanaUaaClient with required scopes and **redirect_uri grafana dashboards FQDN wildcard on <apps-domain>**
-uaac client add --name <grafanaUaaClientId> --scope openid,uaa.resource,doppler.firehose,logs.admin,cloud_controller.read --authorized_grant_types openid,uaa.resource,doppler.firehose,logs.admin,cloud_controller.read --redirect_uri https://*.<apps-domain>/login/generic_oauth -s <grafanaUaaClientSecret>
+uaac client add <grafanaUaaClient>  --scope openid,uaa.resource,doppler.firehose,logs.admin --redirect_uri https://*.<apps-domain>/login/generic_oauth --authorized_grant_types authorization_code,client_credentials -s <grafanaUaaClientSecret
+>
 ```
 
 *CredhubService instance hosting this Grafana UAA client id and secret
