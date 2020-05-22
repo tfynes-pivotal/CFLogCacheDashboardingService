@@ -31,7 +31,7 @@ uaac client add <grafanaUaaClient>  --scope openid,uaa.resource,doppler.firehose
 
 *CredhubService instance hosting this Grafana UAA client id and secret
 ```
-  cf cs credhub default grafanaUaaClient -c '{"clientid":"<grafanaUaaClientId>","clientsecret":"<grafanaUaaClientSecret>"}
+  cf cs credhub default grafanaUaaClient -c '{"clientid":"<grafanaUaaClientId>","clientsecret":"<grafanaUaaClientSecret>"}'
 ```
 Note this service instance can be created once and shared in the target spaces into which Grafana dashboard instances will run.
 ```
