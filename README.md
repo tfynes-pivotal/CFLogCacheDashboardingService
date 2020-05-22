@@ -26,7 +26,7 @@ ssh -i <om-key> ubuntu@<ops-mgr host>
 uaac target https://uaa.<system-domain>
 uaac token client get admin -s <uaa admin-client secret from OM TAS tile credentials tab>
 # Note - create grafanaUaaClient with required scopes and **redirect_uri grafana dashboards FQDN wildcard on <apps-domain>**
-uaac client add <grafanaUaaClient>  --scope openid,uaa.resource,doppler.firehose,logs.admin --redirect_uri https://*.<apps-domain>/login/generic_oauth --authorized_grant_types authorization_code,client_credentials -s <grafanaUaaClientSecret>
+uaac client add <grafanaUaaClient>  --scope openid,uaa.resource,doppler.firehose,logs.admin,cloud_controller.read --autoapprove openid,uaa.resource,doppler.firehose,logs.admin,cloud_controller.read  --redirect_uri https://*.<apps-domain>/login/generic_oauth --authorized_grant_types authorization_code,client_credentials -s <grafanaUaaClientSecret>
 ```
 
 *CredhubService instance hosting this Grafana UAA client id and secret
