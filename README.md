@@ -16,7 +16,7 @@ PreRequisites:
 
 *UAA client (id/secret) for instances of the dashboarding engine to leverage with the following scopes;
 ```
-openid,uaa.resource,doppler.firehose,logs.admin
+openid,uaa.resource,doppler.firehose,logs.admin,cloud_controller.read
 ```
 
 *Steps to create client using uaac (already deployed to OpsManager VM)
