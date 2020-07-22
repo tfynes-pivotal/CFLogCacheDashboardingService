@@ -56,10 +56,10 @@ mkdir grafana
 cd grafana
 wget https://dl.grafana.com/oss/release/grafana-7.0.0.linux-amd64.tar.gz
 ```
-3. Clone this repo and cd into repository directory (CFLogCacheDashboardingService)
+3. Clone this repo and cd into repository directory (cf-grafana-operator)
 ```
-git clone https://github.com/tfynes-pivotal/CFLogCacheDashboardingService
-cd CFLogCacheDashboardingService
+git clone https://github.com/tfynes-pivotal/cf-grafana-operator
+cd cf-grafana-operator
 ```
 2. Extract grafana binary to current (repository directory)
 ```
